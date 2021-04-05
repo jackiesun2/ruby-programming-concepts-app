@@ -8,61 +8,63 @@ class ConceptLibrary
         return @concepts
     end
 
-    def add_concept(concept_input, category_input)
-        concepts << {concept: concept_input,
-                     category: category_input}
+    def display_welcome
+        puts "*"*35
+        puts "Welcome."
+        puts "This is a Programming Concepts App."
+        puts "*"*35
+        display_menu
     end
 
-    def add_concept_message
-        puts "Enter the concept name"
-        # puts "Add Title"
-        # title = gets.chomp
-        # puts "Add Category:"
-        # catergory = gets.chomp
-        # puts "Add Diffculty"
-        # difficulty = gets.chomp
-        # puts "Add Description"
-        # description = gets.chomp
-    end 
-    
+    def display_menu
+        loop do
+        puts "0. Programming Concept Library"
+        puts "1. Add"
+        puts "2. Delete"
+        puts "3. Edit"
+        puts "*"*35
+        input = gets.chomp
+        menu_input(input.to_i)
+        end
+    end
+
+    def menu_input(input)
+        case input
+        when 0 
+            #display programming concept library
+            display_concept_library
+        when 1 
+            #add concept
+            add_concept
+        when 2
+            #delete concept
+        when 3
+            #edit concept
+        when 4
+            #exit app
+        end 
+    end
+
+    def add_concept
+        puts "Add the title of the programming concept"
+        title = gets.chomp
+        puts "Add Category:"
+        category = gets.chomp
+        puts "Add Diffculty to understand from 1-10, 1 is easy and 10 is extremely hard:"
+        level = gets.chomp
+        puts "Explain the concept, what is it? when is it used? etc"
+        description = gets.chomp
+        concepts << {concept: title,
+                     category: category,
+                     difficulty: level,
+                     explained: description
+                    }
+    end
+
+    def display_concept_library
+        
+    end
+
+    new = ConceptLibrary.new
+    new.display_welcome
 end
-
-
-
-
-# Home section
-def display_welcome
-    puts "*"*35
-    puts "Welcome."
-    puts "This is a Programming Concepts App."
-    puts "Press * to continue"
-    puts "*"*35
-end
-
-def display_menu
-    puts "*"*35
-    puts "1. Programming Concept Library"
-    puts "2. Add"
-    puts "3. Delete"
-    puts "4. Edit"
-    puts "*"*35
-end
-
-
-# display concept library
-def display_concept_library
-
-end
-
-
-# menu select
-
-def menu_select
-    #select display concept library
-    #select add
-    #select delete
-    #select edit
-end
-
-
-# add section
