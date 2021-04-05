@@ -8,6 +8,8 @@ class ConceptLibrary
         return @concepts
     end
 
+# display pages
+
     def display_welcome
         puts "*"*35
         puts "Welcome."
@@ -30,20 +32,46 @@ class ConceptLibrary
         end
     end
 
+    def display_concept_library
+        puts "Programming Concept Library"
+        number = 1
+        @concepts.each do |concept|
+            puts "Concept #{number}: #{concept[:name]} | Language Category: #{concept[:category]}"
+            number += 1
+        end
+    end
+
+    def display_concept(concept)
+        puts "Programming Concept"
+        puts "*"*35
+        puts "Concept name: #{concept[:name]}"
+        puts "Concept category: #{concept[:category]}"
+        puts "Concept difficulty #{concept[:difficulty]}"
+        puts "Explained:"
+        puts "#{concept[:explained]}"
+        puts "*"*35
+        how_to_back = gets.chomp
+    end
+
+# menu input
+
     def menu_input(input)
         case input
         when 0 
             display_concept_library
+            select_concept
         when 1 
             add_concept
         when 2
-            #delete concept
+            delete_concept
         when 3
             #edit concept
         when 4
             exit
         end 
     end
+
+# add concept
 
     def add_concept
         puts "Add the title of the programming concept:"
@@ -61,33 +89,24 @@ class ConceptLibrary
                     }
     end
 
-    def display_concept_library
-        puts "Programming Concept Library"
-        puts "Select the concept number to view"
-        number = 1
-        @concepts.each do |concept|
-            puts "Concept #{number}: #{concept[:name]} | Language Category: #{concept[:category]}"
-            number += 1
-        end
-        select_concept
-    end
+# select concept
 
     def select_concept
         concept_number = (gets.chomp.to_i - 1)
         display_concept(@concepts[concept_number])
     end
 
-    def display_concept(concept)
-        puts "Programming Concept"
-        puts "*"*35
-        puts "Concept name: #{concept[:name]}"
-        puts "Concept category: #{concept[:category]}"
-        puts "Concept difficulty #{concept[:difficulty]}"
-        puts "*"*35
-        puts "Explained:"
-        puts "#{concept[:explained]}"
-        how_to_back = gets.chomp
+# delete concept
+
+    def delete_concept
+        puts "Select the concept number you would like to delete"
+        display_concept_library
+        concept_number = (gets.chomp.to_i - 1)
+        @concepts.delete_at(concept_number)
+        display_concept_library
     end
+
+
 
 
     new = ConceptLibrary.new
