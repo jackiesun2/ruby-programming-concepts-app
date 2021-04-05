@@ -1,3 +1,35 @@
+class ConceptLibrary
+    attr_accessor :task
+    def initialize
+        @concepts = []
+    end
+
+    def concepts 
+        return @concepts
+    end
+
+    def add_concept(concept_input, category_input)
+        concepts << {concept: concept_input,
+                     category: category_input}
+    end
+
+    def add_concept_message
+        puts "Enter the concept name"
+        # puts "Add Title"
+        # title = gets.chomp
+        # puts "Add Category:"
+        # catergory = gets.chomp
+        # puts "Add Diffculty"
+        # difficulty = gets.chomp
+        # puts "Add Description"
+        # description = gets.chomp
+    end 
+    
+end
+
+
+
+
 # Home section
 def display_welcome
     puts "*"*35
@@ -34,16 +66,3 @@ end
 
 
 # add section
-
-def add_task
-    puts "Add Title"
-    title = gets.chomp
-    puts "Add Category:"
-    catergory = gets.chomp
-    puts "Add Diffculty"
-    difficulty = gets.chomp
-    puts "Add Description"
-    description = gets.chomp
-end 
-
-# 
