@@ -42,15 +42,21 @@ class ConceptLibrary
     end
 
     def display_concept(concept)
-        puts "Programming Concept"
-        puts "*"*35
-        puts "Concept name: #{concept[:name]}"
-        puts "Concept category: #{concept[:category]}"
-        puts "Concept difficulty #{concept[:difficulty]}"
-        puts "Explained:"
-        puts "#{concept[:explained]}"
-        puts "*"*35
-        how_to_back = gets.chomp
+        puts "Select a concept"
+        loop do
+            system 'clear'
+            puts "Programming Concept"
+            puts "*"*35
+            puts "Concept name: #{concept[:name]}"
+            puts "Concept category: #{concept[:category]}"
+            puts "Concept difficulty #{concept[:difficulty]}"
+            puts "Explained:"
+            puts "#{concept[:explained]}"
+            puts "*"*35
+            puts "Press enter to return to menu"
+            get_back = gets.chomp
+            display_menu
+        end
     end
 
 # menu input
@@ -59,10 +65,12 @@ class ConceptLibrary
         case input
         when 0 
             display_concept_library
+            puts "Select the concept you would like to view"
             select_concept
         when 1 
             add_concept
         when 2
+            puts "Select the concept number you would like to delete"
             delete_concept
         when 3
             #edit concept
@@ -99,16 +107,19 @@ class ConceptLibrary
 # delete concept
 
     def delete_concept
-        puts "Select the concept number you would like to delete"
-        display_concept_library
-        concept_number = (gets.chomp.to_i - 1)
-        @concepts.delete_at(concept_number)
-        display_concept_library
+        loop do
+            system 'clear'
+            display_concept_library
+            concept_number = (gets.chomp.to_i - 1)
+            @concepts.delete_at(concept_number)
+            display_concept_library
+            puts "Press enter to return to menu"
+            get_back = gets.chomp
+            display_menu
+        end
     end
-
-
-
 
     new = ConceptLibrary.new
     new.display_welcome
+
 end
