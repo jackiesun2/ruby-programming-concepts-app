@@ -11,16 +11,6 @@ class ConceptLibrary
 
 # Concept Library
 
-    # def display_concept_library
-    #     puts "Programming Concept Library"
-    #     number = 1
-    #     @concepts.each do |concept|
-    #         puts "Concept #{number}: #{concept[:name]} | Language Category: #{concept[:category]}"
-    #         number += 1
-    #     end
-    #     puts "*"*35
-    # end
-
     def display_concept(concept)
         system 'clear'
         puts "Programming Concept"
@@ -33,9 +23,19 @@ class ConceptLibrary
         puts "*"*35
     end
 
-    def select_concept(index)
-        display_concept(@concepts[index])
+    def display_concept_library
+        puts "Programming Concept Library"
+        number = 1
+        @concepts.each do |concept|
+            puts "Concept #{number}: #{concept[:name]} | Language Category: #{concept[:category]}"
+            number += 1
+        end
+        puts "*"*35
     end
+
+    # def select_concept(index)
+    #     display_concept(@concepts[index])
+    # end
 
     def select_concept_edit
         concept_number = (gets.chomp.to_i - 1)
@@ -44,14 +44,12 @@ class ConceptLibrary
     end
 
     def filter_option
-        number = 1
-        each_concept = @concepts.map do |concept| 
-            number += 1
-            "Concept: #{number} #{concept[:name]}"
+        system 'clear'
+        each_concept = @concepts.map.with_index do |concept, index| 
+            {name: "Concept: #{index + 1} #{concept[:name]}", value: index}
         end
-        @prompt.select("Select the concept you would like to view", each_concept, filter: true)
+        choice = @prompt.select("Select the concept you would like to view", each_concept, filter: true)
     end
-
 
 # menu 
 
@@ -78,13 +76,14 @@ class ConceptLibrary
 
     def menu_input(input)
         case input
-        when 0 
+        when 0
             # display_concept_library
-            filter_option
-            select_concept(validate_input_number)
-            select_concept
+            concept_index = filter_option
+            display_concept(@concepts[concept_index])
+            # select_concept(validate_input_number)
+            # select_concept
             menu_return
-        when 1 
+        when 1
             add_concept
         when 2
             puts "Select the concept number you would like to delete"
@@ -160,7 +159,7 @@ class ConceptLibrary
     def edit_concept
             system 'clear'
             display_concept_library
-            puts "Select the concept you would like to edit..."
+            puts "Select the concept number you would like to edit..."
             concept = select_concept_edit
             puts "Select the field you would like to edit:"
             puts "name = n | category = c | difficulty = d | explained = e"
@@ -225,3 +224,7 @@ end
     # end
 
     # new = ConceptLibrary.new
+
+
+# Old code made redudant by ruby gems
+
