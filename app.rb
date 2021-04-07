@@ -6,9 +6,54 @@ class ConceptLibrary
     attr_accessor :concepts
     def initialize
         @concepts = load_concepts
+        @prompt = TTY::Prompt.new
     end
 
-# display pages
+# Concept Library
+
+    # def display_concept_library
+    #     puts "Programming Concept Library"
+    #     number = 1
+    #     @concepts.each do |concept|
+    #         puts "Concept #{number}: #{concept[:name]} | Language Category: #{concept[:category]}"
+    #         number += 1
+    #     end
+    #     puts "*"*35
+    # end
+
+    def display_concept(concept)
+        system 'clear'
+        puts "Programming Concept"
+        puts "*"*35
+        puts "Concept name: #{concept[:name]}"
+        puts "Concept category: #{concept[:category]}"
+        puts "Concept difficulty: #{concept[:difficulty]}"
+        puts "Explained:"
+        puts "#{concept[:explained]}"
+        puts "*"*35
+    end
+
+    def select_concept(index)
+        display_concept(@concepts[index])
+    end
+
+    def select_concept_edit
+        concept_number = (gets.chomp.to_i - 1)
+        display_concept(@concepts[concept_number])
+        @concepts[concept_number]
+    end
+
+    def filter_option
+        number = 1
+        each_concept = @concepts.map do |concept| 
+            number += 1
+            "Concept: #{number} #{concept[:name]}"
+        end
+        @prompt.select("Select the concept you would like to view", each_concept, filter: true)
+    end
+
+
+# menu 
 
     def display_welcome
         puts "*"*35
@@ -19,83 +64,37 @@ class ConceptLibrary
 
     def display_menu
         loop do
-            system 'clear'
-            puts "*"*35
-            puts "0. Programming Concept Library"
-            puts "1. Add"
-            puts "2. Delete"
-            puts "3. Edit"
-            puts "4. Exit"
-            puts "*"*35
-            input = gets.chomp
-            menu_input(input.to_i)
+            input = @prompt.select("Menu:") do |menu|
+                puts "*"*35
+                menu.choice "Programing Concept Library", 0
+                menu.choice "Add", 1
+                menu.choice "Delete", 2
+                menu.choice "Edit", 3
+                menu.choice "Exit", 4
+            end
+            menu_input(input)              
         end
     end
-
-    def display_concept_library
-        puts "Programming Concept Library"
-        number = 1
-        @concepts.each do |concept|
-            puts "Concept #{number}: #{concept[:name]} | Language Category: #{concept[:category]}"
-            number += 1
-        end
-        puts "*"*35
-    end
-
-    def display_concept(concept)
-            system 'clear'
-            puts "Programming Concept"
-            puts "*"*35
-            puts "Concept name: #{concept[:name]}"
-            puts "Concept category: #{concept[:category]}"
-            puts "Concept difficulty: #{concept[:difficulty]}"
-            puts "Explained:"
-            puts "#{concept[:explained]}"
-            puts "*"*35
-    end
-
-# menu input
-
-    # def menu_input(input)
-    #     case input
-    #     when 0 
-    #         display_concept_library
-    #         puts "Select the concept you would like to view"
-    #         select_concept(validate_input_number)
-    #         menu_return
-    #     when 1 
-    #         add_concept
-    #     when 2
-    #         puts "Select the concept number you would like to delete"
-    #         delete_concept
-    #     when 3
-    #         edit_concept
-    #     when 4
-    #         exit
-    #     end 
-    # end
 
     def menu_input(input)
-        choices = {Elo: 1, Add: 2, Delete: 3, Edit: 4, Exit: 5}
-        prompt.select("What size?", choices)
         case input
-        when 1 
-            display_concept_library
-            puts "Select the concept you would like to view"
+        when 0 
+            # display_concept_library
+            filter_option
             select_concept(validate_input_number)
+            select_concept
             menu_return
-        when 2 
+        when 1 
             add_concept
-        when 3
+        when 2
             puts "Select the concept number you would like to delete"
             delete_concept
-        when 4
+        when 3
             edit_concept
-        when 5
+        when 4
             exit
         end 
     end
-
 
     def menu_return
         puts "Press enter to return to menu"
@@ -140,11 +139,7 @@ class ConceptLibrary
 
 # select concept
 
-    def select_concept_edit
-        concept_number = (gets.chomp.to_i - 1)
-        display_concept(@concepts[concept_number])
-        @concepts[concept_number]
-    end
+
 
 # delete concept
 
@@ -194,9 +189,9 @@ class ConceptLibrary
 # error handling 
 
     def validate_input_number
-        #regex to solve this? 
-        #multiple number? 
-        #how to fix this to input a letter to get an error?
+        # regex to solve this? 
+        # multiple number? 
+        # how to fix this to input a letter to get an error?
         loop do
             concept_number = gets.chomp.to_i * 1
                 if concept_number >= 1
@@ -214,16 +209,19 @@ class ConceptLibrary
                 gets
             end
     end
-        
-
-    def select_concept(index)
-        display_concept(@concepts[index])
-    end
 
 # initialize new 
 
+end 
+
     new = ConceptLibrary.new
     new.display_welcome
-    prompt = TTY::Prompt.new
+     # new2 = ConceptLibrary.new 
+    # str = String.new
+    # prompt = TTY::Prompt.new
 
-end 
+    # class test
+    #     @prompt = 
+    # end
+
+    # new = ConceptLibrary.new
