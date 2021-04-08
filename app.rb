@@ -1,7 +1,6 @@
 require "json"
 require "tty-prompt"
 
-
 class ConceptLibrary
     attr_accessor :concepts
     def initialize
@@ -33,13 +32,33 @@ class ConceptLibrary
         puts "*"*35
     end
 
-    def filter_option
+    def filter_option(path)
         system 'clear'
         each_concept = @concepts.map.with_index do |concept, index| 
             {name: "Concept #{index + 1}: #{concept[:name]} | Language Category: #{concept[:category]}", value: index}
         end
-        choice = @prompt.select("Select the concept you would like to view", each_concept, filter: true)
+        choice = @prompt.select("Select the concept you would like to #{path}", each_concept, filter: true)
     end
+
+# delete concept
+
+def delete_concept
+    concept_number = filter_option("delete")
+    puts "Are you sure you want to delete Concept #{concept_number + 1} (Y/N)"
+    user_input = gets.strip.downcase
+    if user_input == "y" || user_input == "yes"
+        puts "This concept has been deleted. Press enter to return home"
+        @concepts.delete_at(concept_number)
+        save_concept
+    elsif user_input == "n" || user_input == "no"
+        puts "This concept has not been deleted. Press enter to return home"
+    else 
+        puts "Please input Yes/No or Y/N"
+    end
+    gets
+    system 'clear'
+    display_menu
+end
 
 # menu 
 
@@ -67,13 +86,12 @@ class ConceptLibrary
     def menu_input(input)
         case input
         when 0
-            concept_index = filter_option
+            concept_index = filter_option("view")
             display_concept(@concepts[concept_index])
             menu_return
         when 1
             add_concept
         when 2
-            puts "Select the concept number you would like to delete"
             delete_concept
         when 3
             edit_concept
@@ -139,43 +157,23 @@ class ConceptLibrary
         end 
     end
 
-# select concept
+# edit concept
 
-    # def select_concept(index)
-    #     display_concept(@concepts[index])
-    # end
+    def edit_concept
+        system 'clear'
+        display_concept_library
+        puts "Select the concept number you would like to edit..."
+        concept = select_concept_edit
+        puts "Select the field you would like to edit:"
+        puts "name = n | category = c | difficulty = d | explained = e"
+        edit_selection(gets.strip.downcase, concept)
+        save_concept
+    end
 
     def select_concept_edit
         concept_number = (gets.chomp.to_i - 1)
         display_concept(@concepts[concept_number])
-        @concepts[concept_number]
-    end
-
-# delete concept
-
-    def delete_concept
-            system 'clear'
-            display_concept_library
-            concept_number = (gets.chomp.to_i - 1)
-            @concepts.delete_at(concept_number)
-            save_concept
-            display_concept_library
-            puts "Press enter to return to menu"
-            get_back = gets.chomp
-            display_menu
-    end
-
-# edit concept
-
-    def edit_concept
-            system 'clear'
-            display_concept_library
-            puts "Select the concept number you would like to edit..."
-            concept = select_concept_edit
-            puts "Select the field you would like to edit:"
-            puts "name = n | category = c | difficulty = d | explained = e"
-            edit_selection(gets.chomp, concept)
-            save_concept
+        return @concepts[concept_number]
     end
 
     def edit_selection(edit, concept)
@@ -192,7 +190,7 @@ class ConceptLibrary
             puts "New Explanation:"
             concept[:explained] = gets.chomp
         else
-            puts 
+            puts "please select one of the following options: name = n | category = c | difficulty = d | explained = e"
         end
     end
 
@@ -220,9 +218,9 @@ class ConceptLibrary
             end
     end
 
-# initialize new 
-
 end 
+
+# initialize new 
 
     new = ConceptLibrary.new
     new.display_welcome
