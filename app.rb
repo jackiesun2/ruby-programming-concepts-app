@@ -171,9 +171,15 @@ end
     end
 
     def select_concept_edit
+        loop do
         concept_number = (gets.chomp.to_i - 1)
-        display_concept(@concepts[concept_number])
-        return @concepts[concept_number]
+            if concept_number >= 0 && (concept_number + 1) <= @concepts.length
+                display_concept(@concepts[concept_number])
+                return @concepts[concept_number]
+            else
+                puts "Please input the correct concept number"
+            end
+        end
     end
 
     def edit_selection(edit, concept)
