@@ -196,12 +196,15 @@ end
             elsif selection == "c"
                 puts "New Catergory Type:"
                 concept[:category] = gets.chomp
+                break
             elsif selection == "d"
                 puts "New Difficulty Level:"
                 concept[:difficulty] = gets.chomp
+                break
             elsif selection == "e"
                 puts "New Explanation:"
                 concept[:explained] = gets.chomp
+                break
             else
                 system 'clear'
                 display_concept(concept)
@@ -211,12 +214,33 @@ end
         end
     end
 
+    def command_line_library(option) 
+        case option
+        when "library"
+            concept_index = filter_option("view")
+            display_concept(@concepts[concept_index])
+            menu_return
+        when "add"
+            add_concept
+        when "delete"
+            delete_concept
+        when "edit"
+            edit_concept
+        end
+    end
+
 end 
 
-# initialize new 
+# Initialize new & Ruby arguments 
 
     new = ConceptLibrary.new
+    option = ARGV[0]
+    ARGV.clear
+
+    if option == "-h".downcase || option == "-help".downcase
+        puts "This is help"
+    elsif option == "library".downcase || option == "add".downcase || option == "delete".downcase || option == "edit".downcase
+        new.command_line_library(option)
+    else
     new.display_welcome
-
-# Old code made redudant by ruby gems
-
+    end
