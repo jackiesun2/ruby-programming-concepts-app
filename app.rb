@@ -33,20 +33,10 @@ class ConceptLibrary
         puts "*"*35
     end
 
-    # def select_concept(index)
-    #     display_concept(@concepts[index])
-    # end
-
-    def select_concept_edit
-        concept_number = (gets.chomp.to_i - 1)
-        display_concept(@concepts[concept_number])
-        @concepts[concept_number]
-    end
-
     def filter_option
         system 'clear'
         each_concept = @concepts.map.with_index do |concept, index| 
-            {name: "Concept: #{index + 1} #{concept[:name]}", value: index}
+            {name: "Concept #{index + 1}: #{concept[:name]} | Language Category: #{concept[:category]}", value: index}
         end
         choice = @prompt.select("Select the concept you would like to view", each_concept, filter: true)
     end
@@ -77,11 +67,8 @@ class ConceptLibrary
     def menu_input(input)
         case input
         when 0
-            # display_concept_library
             concept_index = filter_option
             display_concept(@concepts[concept_index])
-            # select_concept(validate_input_number)
-            # select_concept
             menu_return
         when 1
             add_concept
@@ -105,13 +92,29 @@ class ConceptLibrary
 
     def add_concept
         puts "Add the title of the programming concept:"
-        title = gets.chomp
+        title = gets.strip
+        while title.empty? 
+            puts "Please enter a title, it cannot be empty"
+            title = gets.strip
+        end
         puts "Add Category:"
-        category = gets.chomp
+        category = gets.strip
+        while category.empty?
+            puts "Please enter a category, it cannot be empty"
+            category = gets.strip
+        end
         puts "Add Diffculty to understand from 1-10, 1 is easy and 10 is extremely hard:"
-        level = gets.chomp
-        puts "Explain the concept, what is it? when is it used?etc..:"
-        description = gets.chomp
+        level = gets.strip
+        while level.empty?
+            puts "Please enter a level, it cannot be empty"
+            level = gets.strip
+        end
+        puts "Explain the concept, what is it? when is it used? etc..:"
+        description = gets.strip
+        while description.empty?
+            puts "Please enter a level, it cannot be empty"
+            description = gets.strip
+        end
         concepts << {name: title,
                      category: category,
                      difficulty: level,
@@ -138,7 +141,15 @@ class ConceptLibrary
 
 # select concept
 
+    # def select_concept(index)
+    #     display_concept(@concepts[index])
+    # end
 
+    def select_concept_edit
+        concept_number = (gets.chomp.to_i - 1)
+        display_concept(@concepts[concept_number])
+        @concepts[concept_number]
+    end
 
 # delete concept
 
@@ -215,16 +226,6 @@ end
 
     new = ConceptLibrary.new
     new.display_welcome
-     # new2 = ConceptLibrary.new 
-    # str = String.new
-    # prompt = TTY::Prompt.new
-
-    # class test
-    #     @prompt = 
-    # end
-
-    # new = ConceptLibrary.new
-
 
 # Old code made redudant by ruby gems
 
