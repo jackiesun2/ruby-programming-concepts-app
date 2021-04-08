@@ -1,5 +1,7 @@
 require "json"
 require "tty-prompt"
+require "ascii"
+require 'colorize'
 
 class ConceptLibrary
     attr_accessor :concepts
@@ -64,8 +66,8 @@ end
 
     def display_welcome
         puts "*"*35
-        puts "Welcome."
-        puts "This is a Programming Concepts App."
+        puts "🅆 🄴 🄻 🄲 🄾 🄼 🄴 .".colorize(:blue)
+        puts "🅃 🄷 🄸 🅂  🄸 🅂  🄰  🄿 🅁 🄾 🄶 🅁 🄰 🄼 🄼 🄸 🄽 🄶  🄲 🄾 🄽 🄲 🄴 🄿 🅃 🅂  🄰 🄿 🄿 .".colorize(:blue)
         display_menu
     end
 
@@ -103,12 +105,14 @@ end
     def menu_return
         puts "Press enter to return to menu"
         gets
+        system 'clear'
         display_menu
     end
 
 # add concept
 
     def add_concept
+        system 'clear'
         puts "Add the title of the programming concept:"
         title = gets.strip
         while title.empty? 
@@ -166,7 +170,7 @@ end
         concept = select_concept_edit
         puts "Select the field you would like to edit:"
         puts "name = n | category = c | difficulty = d | explained = e"
-        edit_selection(gets.strip.downcase, concept)
+        edit_selection(concept)
         save_concept
     end
 
@@ -182,46 +186,29 @@ end
         end
     end
 
-    def edit_selection(edit, concept)
-        if edit == "n"
-            puts "New Concept Name:"
-            concept[:name] = gets.chomp
-        elsif edit == "c"
-            puts "New Catergory Type:"
-            concept[:category] = gets.chomp
-        elsif edit == "d"
-            puts "New Difficulty Level:"
-            concept[:difficulty] = gets.chomp
-        elsif edit == "e"
-            puts "New Explanation:"
-            concept[:explained] = gets.chomp
-        else
-            puts "please select one of the following options: name = n | category = c | difficulty = d | explained = e"
-        end
-    end
-
-# error handling 
-
-    def validate_input_number
-        # regex to solve this? 
-        # multiple number? 
-        # how to fix this to input a letter to get an error?
+    def edit_selection(concept)
         loop do
-            concept_number = gets.chomp.to_i * 1
-                if concept_number >= 1
-                    concept_number = (concept_number - 1)
-                        if @concepts.length >= (concept_number + 1)
-                            return concept_number
-                        else
-                            puts "Number is not between 1 - #{@concepts.length} try another number"
-                        end
-                else 
-                    # puts "This is not a number, Press enter to try again"
-                    # gets
-                end
-                puts "This is not a number, Press enter to try again"
-                gets
+        selection = gets.strip.downcase
+            if selection == "n"
+                puts "New Concept Name:"
+                concept[:name] = gets.chomp
+                break
+            elsif selection == "c"
+                puts "New Catergory Type:"
+                concept[:category] = gets.chomp
+            elsif selection == "d"
+                puts "New Difficulty Level:"
+                concept[:difficulty] = gets.chomp
+            elsif selection == "e"
+                puts "New Explanation:"
+                concept[:explained] = gets.chomp
+            else
+                system 'clear'
+                display_concept(concept)
+                puts "You have not selected the correct input." 
+                puts "Please select one of the following options to edit: name = n | category = c | difficulty = d | explained = e"
             end
+        end
     end
 
 end 
