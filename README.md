@@ -1,6 +1,18 @@
 # Programming Concepts Application
 
+# Software Plan
+
+# Software Implementation Plan
+
+# Control Flow Diagram
+
+# Error Handling
+
 # Testing
+
+# Bash Script
+
+To launch the application using the bash script, ensure you are in the correct directory and type "./run_app.sh".
 
 ### Feature 1 CRUD:
 
