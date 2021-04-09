@@ -1,7 +1,5 @@
 # Programming Concepts Application
 
-## Instructions
-
 ## Statement of Purpose and Scope
 
 The programming concepts applications aims to help users store programming concepts. The application allows users to enter the programming concept, state its difficulty, categorize it by it's programming language and store a brief description of the concept. Users can use the application to view programming concepts they may have learned in the past and forgotten or to simply check if their understanding of the concept is based on past entries. This application was designed for beginner developers to store programming concepts they have learned which they can access to revise and deepen their understanding and knowledge base with. As a beginner developer, there are many new programming concepts and terminologies which are quite foreign and difficult to grasp. By having a programming concept app, developers will have access to a whole library of concepts to fall back on. To use the app, beginner developers will store concepts they have learned throughout their journey to become a software developer.
@@ -10,7 +8,7 @@ The programming concepts applications aims to help users store programming conce
 
 ### Create, Read, Update and Delete (CRUD)
 
-The first feature the application will have is the ability to add, delete and edit programming concepts. When students learn a new programming concept, they will use the add feature to store a new concept. Once a concept is no longer required, to free up storage the concept can be deleted. If a concept is retaught and understood differently, the student has the ability to update that concept with a new explanation. The application will ensure that the correct inputs are used, as error handling will help identify if the incorrect input is used. The use of variables help store the information in a manner where it is easy to read for other developers that access the code base. The use of loops and control structures help keep the code DRY.
+The first feature the application will have is the ability to add, delete and edit programming concepts. When students learn a new programming concept, they will use the add feature to store a new concept. Once a concept is no longer required, to free up storage the concept can be deleted. If a concept is retaught and understood differently, the student has the ability to update that concept with a new explanation. The application will ensure that the correct inputs are used, as error handling will help identify if the incorrect input is used. The use of variables help store the information in a manner where it is easy to read for other developers that access the code base. The use of loops and control structures help keep the code DRY. Instructions on scenarios on how to use this feature is given in the testing section of this document.
 
 ### Persistence Storage
 
@@ -20,15 +18,21 @@ The second feature of the application is the use of persistence storage. This al
 
 The last feature is the ability to filter through concepts in the concept library by stating the concept name, it's language category and its difficulty to understand. This filter feature gives users the flexibility and ease of accessing concepts with keywords rather than having to scroll through a list of concepts to find the one they are searching for. This will help simplify the steps it takes for a user to access the relevant information in a time efficient manner. The filter feature is made available by the ruby gem TTY-Prompt.
 
-## User Interaction and Experience
-
 ## Software Implementation Plan
 
-The software implementation plan for the application was designed using Trello, as pictured below. You can find the link here: !!!!!!INSERT LINK!!!!!
+The software implementation plan for the application was designed using Trello, as pictured below. You can find the link here: https://trello.com/b/Y7Ujg39p/programming-concept-library-app
+
+![Trello](./docs/Trello.png)
 
 ## Control Flow Diagram
 
+To structure the flow of the application, a control flow diagram was used. This is demonstrated below.
+
+![Control Flow Diagram](./docs/control-flow.png)
+
 ## Error Handling
+
+The application utilizes error handling through control structures. The use of IF statements and case statements allows the application to test whether the correct input has been adopted by the user. This has been used through the CRUD features, which ensures that the user is not inputting blank text and incorrect data types. If the input of the user is incorrect, a error message will prompt the user and relevant instructions will be given to help the user correct their input. Rescues have been adopted to ensure that the JSON file which the application uses to store its data exists. If the file does not exist, and error message will prompt the user.
 
 ## Testing
 
