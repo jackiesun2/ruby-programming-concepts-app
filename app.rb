@@ -238,7 +238,8 @@ end
     ARGV.clear
 
     if option == "-h".downcase || option == "-help".downcase
-        puts "This is help"
+        puts "This is a programming concepts application"
+        puts "Command line arguments include add, delete and edit arguments. To use the command line argument, run the program with ruby app.rb, to use the CRUD features through the command line use ruby app.rb add to add and vice versa for delete and edit."
     elsif option == "library".downcase || option == "add".downcase || option == "delete".downcase || option == "edit".downcase
         new.command_line_library(option)
     else
