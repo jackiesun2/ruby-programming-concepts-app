@@ -1,5 +1,7 @@
 # Programming Concepts Application
 
+GitHub link: https://github.com/jackiesun2/ruby-programming-concepts-app/tree/main
+
 ## Statement of Purpose and Scope
 
 The programming concepts applications aims to help users store programming concepts. The application allows users to enter the programming concept, state its difficulty, categorize it by it's programming language and store a brief description of the concept. Users can use the application to view programming concepts they may have learned in the past and forgotten or to simply check if their understanding of the concept is based on past entries. This application was designed for beginner developers to store programming concepts they have learned which they can access to revise and deepen their understanding and knowledge base with. As a beginner developer, there are many new programming concepts and terminologies which are quite foreign and difficult to grasp. By having a programming concept app, developers will have access to a whole library of concepts to fall back on. To use the app, beginner developers will store concepts they have learned throughout their journey to become a software developer.
