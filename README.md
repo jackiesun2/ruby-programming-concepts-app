@@ -1,18 +1,36 @@
 # Programming Concepts Application
 
-# Software Plan
+## Instructions
 
-# Software Implementation Plan
+## Statement of Purpose and Scope
 
-# Control Flow Diagram
+The programming concepts applications aims to help users store programming concepts. The application allows users to enter the programming concept, state its difficulty, categorize it by it's programming language and store a brief description of the concept. Users can use the application to view programming concepts they may have learned in the past and forgotten or to simply check if their understanding of the concept is based on past entries. This application was designed for beginner developers to store programming concepts they have learned which they can access to revise and deepen their understanding and knowledge base with. As a beginner developer, there are many new programming concepts and terminologies which are quite foreign and difficult to grasp. By having a programming concept app, developers will have access to a whole library of concepts to fall back on. To use the app, beginner developers will store concepts they have learned throughout their journey to become a software developer.
 
-# Error Handling
+## Features
 
-# Testing
+### Create, Read, Update and Delete (CRUD)
 
-# Bash Script
+The first feature the application will have is the ability to add, delete and edit programming concepts. When students learn a new programming concept, they will use the add feature to store a new concept. Once a concept is no longer required, to free up storage the concept can be deleted. If a concept is retaught and understood differently, the student has the ability to update that concept with a new explanation. The application will ensure that the correct inputs are used, as error handling will help identify if the incorrect input is used. The use of variables help store the information in a manner where it is easy to read for other developers that access the code base. The use of loops and control structures help keep the code DRY.
 
-To launch the application using the bash script, ensure you are in the correct directory and type "./run_app.sh".
+### Persistence Storage
+
+The second feature of the application is the use of persistence storage. This allows the application to store concepts that have been added, so that when the application is closed and reopened at a later date, the concept still remains in the application. This allows users to close the application when they are not using it, whilst still having the ability to access past concepts that have been stored. The error handling ensure that the relevant JSON files exist so that the information can be stored and read for a later date.
+
+### Filtering
+
+The last feature is the ability to filter through concepts in the concept library by stating the concept name, it's language category and its difficulty to understand. This filter feature gives users the flexibility and ease of accessing concepts with keywords rather than having to scroll through a list of concepts to find the one they are searching for. This will help simplify the steps it takes for a user to access the relevant information in a time efficient manner. The filter feature is made available by the ruby gem TTY-Prompt.
+
+## User Interaction and Experience
+
+## Software Implementation Plan
+
+The software implementation plan for the application was designed using Trello, as pictured below. You can find the link here: !!!!!!INSERT LINK!!!!!
+
+## Control Flow Diagram
+
+## Error Handling
+
+## Testing
 
 ### Feature 1 CRUD:
 
@@ -63,3 +81,7 @@ To launch the application using the bash script, ensure you are in the correct d
 7. Type in ruby app.rb again to run the program.
 8. Select the programming concepts library on the menu.
 9. Scroll down to the bottom and the concept you have deleted will now be gone.
+
+## Bash Script
+
+To launch the application using the bash script, ensure you are in the correct directory and type "./run_app.sh".
