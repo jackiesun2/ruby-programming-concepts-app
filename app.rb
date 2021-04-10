@@ -115,28 +115,16 @@ end
         system 'clear'
         puts "Add the title of the programming concept:"
         title = gets.strip
-        while title.empty? 
-            puts "Please enter a title, it cannot be empty"
-            title = gets.strip
-        end
+        check_input(title, "title")
         puts "Add Category:"
         category = gets.strip
-        while category.empty?
-            puts "Please enter a category, it cannot be empty"
-            category = gets.strip
-        end
+        check_input(category, "category")
         puts "Add Diffculty to understand from 1-10, 1 is easy and 10 is extremely hard:"
         level = gets.strip
-        while level.empty?
-            puts "Please enter a level, it cannot be empty"
-            level = gets.strip
-        end
+        check_input(level, "level")
         puts "Explain the concept, what is it? when is it used? etc..:"
         description = gets.strip
-        while description.empty?
-            puts "Please enter a level, it cannot be empty"
-            description = gets.strip
-        end
+        check_input(description, "description")
         concepts << {name: title,
                      category: category,
                      difficulty: level,
@@ -144,6 +132,14 @@ end
                     }
         save_concept
     end
+
+    def check_input(input, input_name)
+        while input.empty? 
+            puts "Please enter a #{input_name}, it cannot be empty"
+            input = gets.strip
+        end
+    end 
+
 
 # persistence storage
 
@@ -245,8 +241,3 @@ end
     else
     new.display_welcome
     end
-
-
-#expect to see... this is the last concept...
-#scernario
-#step 1 
