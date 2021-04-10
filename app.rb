@@ -55,7 +55,7 @@ def delete_concept
     elsif user_input == "n" || user_input == "no"
         puts "This concept has not been deleted. Press enter to return home"
     else 
-        puts "Please input Yes/No or Y/N"
+        puts "Please input Yes/No or Y/N or enter to return to menu"
     end
     gets
     system 'clear'
@@ -121,7 +121,7 @@ end
         check_input(category, "category")
         puts "Add Diffculty to understand from 1-10, 1 is easy and 10 is extremely hard:"
         level = gets.strip
-        check_input(level, "level")
+        check_input(level, "number between 1 - 10")
         puts "Explain the concept, what is it? when is it used? etc..:"
         description = gets.strip
         check_input(description, "description")
@@ -139,7 +139,6 @@ end
             input = gets.strip
         end
     end 
-
 
 # persistence storage
 
